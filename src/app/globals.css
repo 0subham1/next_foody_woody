@@ -1,107 +1,119 @@
-:root {
-  --max-width: 1100px;
-  --border-radius: 12px;
-  --font-mono: ui-monospace, Menlo, Monaco, "Cascadia Mono", "Segoe UI Mono",
-    "Roboto Mono", "Oxygen Mono", "Ubuntu Monospace", "Source Code Pro",
-    "Fira Mono", "Droid Sans Mono", "Courier New", monospace;
+@import url("https://fonts.googleapis.com/css2?family=Ubuntu:wght@300&display=swap");
 
-  --foreground-rgb: 0, 0, 0;
-  --background-start-rgb: 214, 219, 220;
-  --background-end-rgb: 255, 255, 255;
-
-  --primary-glow: conic-gradient(
-    from 180deg at 50% 50%,
-    #16abff33 0deg,
-    #0885ff33 55deg,
-    #54d6ff33 120deg,
-    #0071ff33 160deg,
-    transparent 360deg
-  );
-  --secondary-glow: radial-gradient(
-    rgba(255, 255, 255, 1),
-    rgba(255, 255, 255, 0)
-  );
-
-  --tile-start-rgb: 239, 245, 249;
-  --tile-end-rgb: 228, 232, 233;
-  --tile-border: conic-gradient(
-    #00000080,
-    #00000040,
-    #00000030,
-    #00000020,
-    #00000010,
-    #00000010,
-    #00000080
-  );
-
-  --callout-rgb: 238, 240, 241;
-  --callout-border-rgb: 172, 175, 176;
-  --card-rgb: 180, 185, 188;
-  --card-border-rgb: 131, 134, 135;
+body {
+  font-size: 18px;
+  font-family: "Ubuntu" !important;
+  overflow: auto;
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --foreground-rgb: 255, 255, 255;
-    --background-start-rgb: 0, 0, 0;
-    --background-end-rgb: 0, 0, 0;
+.q1 div {
+  padding: 5px;
+  height: 50px;
+}
 
-    --primary-glow: radial-gradient(rgba(1, 65, 255, 0.4), rgba(1, 65, 255, 0));
-    --secondary-glow: linear-gradient(
-      to bottom right,
-      rgba(1, 65, 255, 0),
-      rgba(1, 65, 255, 0),
-      rgba(1, 65, 255, 0.3)
-    );
+.row0 {
+  display: flex;
+  align-items: center;
+}
 
-    --tile-start-rgb: 2, 13, 46;
-    --tile-end-rgb: 2, 5, 19;
-    --tile-border: conic-gradient(
-      #ffffff80,
-      #ffffff40,
-      #ffffff30,
-      #ffffff20,
-      #ffffff10,
-      #ffffff10,
-      #ffffff80
-    );
+.row1 {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 5px;
+}
 
-    --callout-rgb: 20, 20, 20;
-    --callout-border-rgb: 108, 108, 108;
-    --card-rgb: 100, 100, 100;
-    --card-border-rgb: 200, 200, 200;
+.rowSpaceAround {
+  display: flex;
+  justify-content: space-around;
+}
+.card0 {
+  box-shadow: 0px 1px 4px -1px #999999;
+  border-radius: 5px;
+  padding: 5px;
+  margin: 10px;
+}
+
+.pointer {
+  cursor: pointer;
+}
+
+.adminPanel {
+  margin-top: 12px;
+  width: 200px;
+  /* cursor: pointer; */
+  height: 75vh;
+}
+
+.adminPanel div {
+  padding-left: 10px;
+}
+
+.icon {
+  font-size: 17px !important;
+  cursor: "pointer" !important;
+}
+
+.icon:hover {
+  color: aqua;
+  cursor: pointer;
+}
+
+.hover:hover {
+  color: rgb(231, 63, 63);
+  cursor: pointer;
+}
+
+.mobileView {
+  display: none !important;
+}
+
+.deskView {
+  display: block !important;
+}
+
+@media (max-width: 70rem) {
+  .mobileView {
+    display: flex !important;
+  }
+
+  .deskView {
+    display: none !important;
+  }
+  #cartBox {
+    height: 30vh !important;
+    overflow-y: "auto" !important;
   }
 }
 
-* {
-  box-sizing: border-box;
-  padding: 0;
-  margin: 0;
+@media (max-width: 70rem) {
+  #cart {
+    display: none;
+  }
+  #responsiveCart {
+    display: block !important;
+  }
+
+  #cartDiv {
+    width: 100% !important;
+  }
+
+  #itemList {
+    width: 100% !important;
+  }
 }
 
-html,
-body {
-  max-width: 100vw;
-  overflow-x: hidden;
-}
-
-body {
-  color: rgb(var(--foreground-rgb));
-  background: linear-gradient(
-      to bottom,
-      transparent,
-      rgb(var(--background-end-rgb))
-    )
-    rgb(var(--background-start-rgb));
-}
-
-a {
-  color: inherit;
-  text-decoration: none;
-}
-
-@media (prefers-color-scheme: dark) {
-  html {
-    color-scheme: dark;
+@media (max-width: 70rem) {
+  #toHide {
+    display: none !important;
+  }
+  .adminPanel {
+    min-width: 30px !important;
+  }
+  .adminPanel div {
+    padding-left: 5px !important;
+  }
+  .navKeys {
+    display: none !important;
   }
 }
