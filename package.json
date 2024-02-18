@@ -1,16 +1,17 @@
 {
-  "name": "foody_woody",
+  "name": "next_foodcart",
   "version": "0.1.0",
   "private": true,
   "scripts": {
     "dev": "next dev -p 5000",
-    "build": "next build",
-    "start": "next start",
-    "lint": "next lint"
+    "build": "next build",    
+    "start": "next start",    
+    "lint": "next lint"         
   },
   "dependencies": {
     "@emotion/react": "^11.11.3",
     "@emotion/styled": "^11.11.0",
+    "@mui/icons-material": "^5.15.10",
     "@mui/material": "^5.15.10",
     "axios": "^1.6.7",
     "next": "14.1.0",

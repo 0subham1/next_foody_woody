@@ -1,13 +1,8 @@
 "use client";
 import React, { useEffect } from "react";
 
-const page = () => {
-  useEffect(() => {
-    localStorage.setItem("key", 123);
-  }, []);
-
-  console.log("subhammmmmmmm");
-  return <div>page</div>;
+const Home = () => {
+  return <div>Home</div>;
 };
 
-export default page;
+export default Home;
