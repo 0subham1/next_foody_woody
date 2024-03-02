@@ -85,12 +85,13 @@ a {
   box-shadow: 0px 1px 4px -1px #999999;
   border-radius: 5px;
   padding: 5px;
-  height: 4vh;
+  height: 29px;
 }
 
 #searchField {
   border: 0px;
-  height: 4vh;
+  height: 28px;
+  outline: none;
 }
 .card0 {
   box-shadow: 0px 1px 4px -1px #999999;

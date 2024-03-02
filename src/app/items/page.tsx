@@ -35,6 +35,7 @@ import {
   Table,
 } from "@mui/material";
 import CustomSnack from "@/components/CustomSnack";
+import { ApiCallerGet, printHello } from "@/components/CustomApiCaller";
 
 const Items = () => {
   const [itemList, setItemList] = useState<any>([]);
@@ -72,18 +73,11 @@ const Items = () => {
     },
   ];
 
-  const handleGetItems = () => {
-    axios
-      .get(BASE_URL + "items")
-      .then((res) => {
-        console.log(res, "res items");
-        res.data.reverse();
-        setItemList(res.data);
-        setItemList2(res.data);
-      })
-      .catch((err) => {
-        throw new Error(err);
-      });
+  const handleGetItems = async () => {
+    let abc = await ApiCallerGet("items");
+    setItemList(abc ?? []);
+    setItemList2(abc ?? []);
+    console.log(abc, "abc");
   };
 
   const handleData = (e) => {
@@ -94,21 +88,48 @@ const Items = () => {
       [e.target.name]: txt ?? "",
     });
   };
-  console.log(item, "item");
-  const resHandler = () => {};
 
   const handleSave = (e) => {
     e.preventDefault();
     setLoading(true);
-    setSnack({
-      value: true,
-      msg: "hello world",
-      type: "success",
-    });
+
+    let data: any = {
+      name: item?.name,
+      price: item?.price,
+      category: item?.category?.value,
+      img: "",
+      note: "",
+    };
+
+    if (!item?.name) {
+      setLoading(false);
+      return setSnack({
+        value: true,
+        msg: "name required",
+        type: "error",
+      });
+    }
+    if (!item?.price) {
+      setLoading(false);
+      return setSnack({
+        value: true,
+        msg: "price required",
+        type: "error",
+      });
+    }
+    if (!item?.category?.value) {
+      setLoading(false);
+      return setSnack({
+        value: true,
+        msg: "category required",
+        type: "error",
+      });
+    }
 
     if (item._id) {
+      data._id = item._id;
       axios
-        .put(BASE_URL + "editItem/" + item._id, item)
+        .put(BASE_URL + "editItem/" + item._id, data)
         .then((res) => {
           if (res.data.modifiedCount > 0) {
             setLoading(false);
@@ -134,7 +155,7 @@ const Items = () => {
         });
     } else {
       axios
-        .post(BASE_URL + "addItem", item)
+        .post(BASE_URL + "addItem", data)
         .then((res) => {
           if (res.data) {
             setLoading(false);
@@ -195,44 +216,50 @@ const Items = () => {
           Add item
         </Button>
       </div>
-
-      <TableContainer>
-        <Table sx={{ minWidth: 650 }} aria-label="simple table">
-          <TableHead>
-            <TableRow>
-              <TableCell>Item</TableCell>
-              <TableCell>Category</TableCell>
-              <TableCell>Price</TableCell>
-              <TableCell>Action</TableCell>
-            </TableRow>
-          </TableHead>
-          <TableBody>
-            {itemList?.length > 0 ? (
-              itemList?.map((a) => {
-                return (
-                  <TableRow>
-                    <TableCell>{a?.name}</TableCell>
-                    <TableCell>{a?.category}</TableCell>
-                    <TableCell>{a?.price}</TableCell>
-                    <TableCell>
-                      <EditIcon
-                        fontSize="small"
-                        className="pointer"
-                        onClick={() => {
-                          setItemDialog(true);
-                          setItem(a);
-                        }}
-                      />
-                    </TableCell>
-                  </TableRow>
-                );
-              })
-            ) : (
-              <CircularProgress style={{ marginLeft: "50vw" }} size={50} />
-            )}
-          </TableBody>
-        </Table>
-      </TableContainer>
+      {itemList2?.length > 0 ? (
+        <TableContainer>
+          <Table sx={{ minWidth: 650 }} aria-label="simple table">
+            <TableHead>
+              <TableRow>
+                <TableCell>Item</TableCell>
+                <TableCell>Category</TableCell>
+                <TableCell>Price</TableCell>
+                <TableCell>Action</TableCell>
+              </TableRow>
+            </TableHead>
+            <TableBody>
+              {itemList?.length > 0 ? (
+                itemList?.map((a) => {
+                  return (
+                    <TableRow>
+                      <TableCell>{a?.name}</TableCell>
+                      <TableCell>{a?.category}</TableCell>
+                      <TableCell>{a?.price}</TableCell>
+                      <TableCell>
+                        <EditIcon
+                          fontSize="small"
+                          className="pointer"
+                          onClick={() => {
+                            setItemDialog(true);
+                            setItem(a);
+                          }}
+                        />
+                      </TableCell>
+                    </TableRow>
+                  );
+                })
+              ) : (
+                <h4>No item Found</h4>
+              )}
+            </TableBody>
+          </Table>
+        </TableContainer>
+      ) : (
+        <div className="flex">
+          Items Loading ...
+          <CircularProgress style={{ marginLeft: "8px" }} />
+        </div>
+      )}
 
       <Dialog
         open={itemDialog}
